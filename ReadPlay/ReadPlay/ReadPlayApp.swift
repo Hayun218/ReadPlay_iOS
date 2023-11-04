@@ -11,7 +11,7 @@ import SwiftUI
 struct ReadPlayApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          StudyPlayView()
         }
     }
 }
