@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import SwiftUI
 
-struct VocabList: Hashable, Codable {
+struct VocabListModel: Hashable, Codable {
   var word_id: Int
   var word: String
   var meaning: String

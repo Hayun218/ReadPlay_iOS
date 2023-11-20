@@ -33,14 +33,13 @@ struct StudyPlayView: View {
           .foregroundStyle(.yellow)
           .gesture(
             DragGesture(minimumDistance: 0)
-              .onChanged { _ in
-                if !studyPlayVM.isPressing {
-                  studyPlayVM.isButtonTapped()
+              .onChanged{ _ in
+                  studyPlayVM.isButtonHeld()
                   studyPlayVM.startTimer()
-                }
+                  studyPlayVM.startIncreasingTimer()
               }
               .onEnded { _ in
-                studyPlayVM.isButtonUnTapped()
+                studyPlayVM.isButtonReleased()
               }
           )
           .padding(30)
