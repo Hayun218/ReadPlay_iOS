@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct CategoryView: View {
-  
+  @EnvironmentObject var dataController : DataController
   @StateObject var categoryVM = CategoryViewModel()
+  
+  
   
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
@@ -19,16 +21,20 @@ struct CategoryView: View {
       secondRow()
       
       ScrollView {
+       // Text(categoryVM.categories.first!.title)
+        
         
         // 전체가 onTapGesture로 액션!
-        CategoryItem(category: .init(category_id: 1, title: "here", totalNum: 500, progress: 40))
+        ForEach(categoryVM.categories, id: \.self) { category in
+          CategoryItem(category: category)
+        }
+        
       }
-      
     }
     .padding(.horizontal, 20)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(backGradient())
-    .fullScreenCover(isPresented: $categoryVM.isAddOn, content: {
+    .sheet(isPresented: $categoryVM.isAddOn, content: {
       CategoryAddView()
     })
     

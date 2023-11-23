@@ -10,12 +10,15 @@ import SwiftUI
 struct CategoryAddView: View {
   @Environment(\.dismiss) private var dismiss
   
-    var body: some View {
+  var body: some View {
+    ScrollView {
       Button(action: {dismiss()}, label: {
         /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
       })
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
+    .interactiveDismissDisabled()
+  }
 }
 
 #Preview {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryItem: View {
-  var category: CategoryModel
+  var category: Category
   
   var body: some View {
     
@@ -42,7 +42,7 @@ extension CategoryItem {
   
   private func titleText() -> some View {
     return  HStack(spacing: 15) {
-      Text("0\(category.category_id)")
+      Text("0\(category.categoryId)")
         .customFont(myFont.caption2)
       
       Text("\(category.title)")
@@ -58,9 +58,9 @@ extension CategoryItem {
       Text("\(Int(category.progress)) / \(Int(category.totalNum))")
         .customFont(myFont.caption1)
         .foregroundStyle(.gray300)
-      ProgressView(value: category.progress, total: category.totalNum)
+      ProgressView(value: Double(category.progress), total: Double(category.totalNum))
         .overlay(progressGradient())
-        .mask(ProgressView(value: category.progress, total: category.totalNum))
+        .mask(ProgressView(value: Double(category.progress), total: Double(category.totalNum)))
         .scaleEffect(x: 1, y: 1.4, anchor: .center)
         .frame(width: 100)
     }
@@ -79,6 +79,6 @@ extension CategoryItem {
   }
 }
 
-#Preview {
-  CategoryItem(category: .init(category_id: 01, title: "초등 영어 50단어", totalNum: 50, progress: 3))
-}
+//#Preview {
+//  CategoryItem(category: .init(category_id: 01, title: "초등 영어 50단어", totalNum: 50, progress: 3))
+//}
