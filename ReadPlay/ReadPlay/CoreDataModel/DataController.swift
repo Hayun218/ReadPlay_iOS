@@ -16,6 +16,7 @@ final class DataController: ObservableObject {
   let container: NSPersistentContainer
   let context: NSManagedObjectContext
   
+  @Published var fetchedCategories = [Category]() // sink 연습하기,,
   
   init(inMemory: Bool = false) {
     container = NSPersistentContainer(name: "VocabModel")
@@ -27,26 +28,30 @@ final class DataController: ObservableObject {
     
     context = container.viewContext
     
-    resetCoreData()
+    //resetCoreData()
     
-    saveDefaultCategory()
-  }
-  
-  func saveContext() {
-    let context = container.viewContext
-    if context.hasChanges {
-      do {
-        try context.save()
-        print("Data Saved!")
-      } catch {
-        let nserror = error as NSError
-        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-      }
+    fetchCategory()
+    if fetchedCategories.isEmpty {
+      saveDefaultCategory()
     }
   }
   
+  // MARK: - Context 저장
   
-  func saveDefaultCategory() {
+  func save(context: NSManagedObjectContext) {
+    if context.hasChanges {
+      do{
+        try context.save()
+        print("Data Saved!")
+      }catch{
+        print("Could not save the data")
+      }
+    }
+  }
+
+  // MARK: - DEFAULT CREATE
+  
+  private func saveDefaultCategory() {
     
     let staticVocab: [StaticVocab] = load(fileName: "elementaryVocab")
     let staticCategory = Category(context: context)
@@ -55,23 +60,25 @@ final class DataController: ObservableObject {
     staticCategory.totalNum = Int32(staticVocab.count)
     
     for vocab in staticVocab {
-      //      let vocabData = Vocab(context: context)
-      //      
-      //      vocabData.id = Int32(vocab.word_id)
-      //      vocabData.meaning = vocab.meaning
-      //      vocabData.word = vocab.word
-      //      
-      //      staticCategory.addToVocabs(vocabData)
-      saveVocab(category: staticCategory, wordId: Int32(vocab.word_id), meaning: vocab.meaning, word: vocab.meaning)
+      saveVocab(category: staticCategory, wordId: Int32(vocab.word_id), meaning: vocab.meaning, word: vocab.meaning, context: context)
     }
-    
-    saveContext()
-    
-    print(staticCategory.vocabs.count)
-    
   }
   
-  func saveVocab(category: Category, wordId: Int32, meaning: String, word: String) {
+  // MARK: - CREATE
+  
+  // 전체 카테고리 생성 및 단어리스트 저장
+  func saveCategory(categoryId: Int32, title: String, newVocabs: [Vocab], context: NSManagedObjectContext) {
+    let category = Category(context: context)
+    let newId: Int32 = fetchedCategories.last!.categoryId+1
+    
+    category.categoryId = categoryId
+    category.title = title
+    
+    saveNewCategoryVocabs(newCategory: category, newId: newId, newVocabs: newVocabs, context: context)
+  }
+  
+  // 한 단어 저장
+  func saveVocab(category: Category, wordId: Int32, meaning: String, word: String, context: NSManagedObjectContext) {
     let vocab = Vocab(context: context)
     
     vocab.id = wordId
@@ -79,7 +86,69 @@ final class DataController: ObservableObject {
     vocab.word = word
     
     category.addToVocabs(vocab)
+    
+    save(context: context)
   }
+  
+  private func saveNewCategoryVocabs(newCategory: Category, newId: Int32, newVocabs: [Vocab], context: NSManagedObjectContext) {
+    
+    newCategory.categoryId = newId
+    newCategory.totalNum = Int32(newVocabs.count)
+    newCategory.progress = 0
+    
+    for vocab in newVocabs {
+      saveVocab(category: newCategory, wordId: Int32(vocab.id), meaning: vocab.meaning, word: vocab.word, context: context)
+    }
+  }
+  
+  // MARK: - READ
+  
+  func fetchCategory() {
+    let request = NSFetchRequest<Category>(entityName: "Category")
+    do {
+      fetchedCategories = try self.context.fetch(request)
+    } catch let error {
+      print("error fetching \(error.localizedDescription)")
+    }
+  }
+
+  
+  // MARK: - UPDATE
+  func updateVocab(vocab: Vocab, meaning: String, word: String, context: NSManagedObjectContext) {
+        
+    vocab.meaning = meaning
+    vocab.word = word
+    
+    save(context: context)
+  }
+  
+  func updateStatusVocab(vocab: Vocab, status: Int32, context: NSManagedObjectContext) {
+    vocab.status = status
+    
+    save(context: context)
+  }
+  
+  // 카테고리 전체 수정 -> 하면서 하기
+  func updateCategory(category: Category, title: String, vocabs: [Vocab], context: NSManagedObjectContext) {
+    
+    category.title = title
+  }
+
+  
+  // MARK: - DELETE
+  
+  // 카테고리 전체 삭제
+  func deleteCategory(category: Category, context: NSManagedObjectContext) {
+    context.delete(category)
+    save(context: context)
+  }
+  
+  // 한 단어 삭제
+  func deleteVocab(vocab: Vocab, context: NSManagedObjectContext) {
+    context.delete(vocab)
+    save(context: context)
+  }
+  
   
   // MARK: - 초기화
   
@@ -94,7 +163,18 @@ final class DataController: ObservableObject {
       print("Core Data reset failed: \(error.localizedDescription)")
     }
   }
+  
+  
+  // 뷰모델에서 진행,,
+  func getCurrentDateTime() -> String {
+    let formatter = DateFormatter() //객체 생성
+    formatter.dateStyle = .long
+    formatter.timeStyle = .medium
+    formatter.dateFormat = "yyyy-MM-dd" //데이터 포멧 설정
+    let str = formatter.string(from: Date()) //문자열로 바꾸기
+    
+    return str
+  }
 }
 
 
-//

@@ -8,35 +8,39 @@
 import SwiftUI
 
 struct CategoryView: View {
+  @Environment(\.managedObjectContext) var managedObjectContext
+  //  @StateObject var dataController = DataController.shared
   @EnvironmentObject var dataController : DataController
   @StateObject var categoryVM = CategoryViewModel()
-  
+  @FetchRequest(sortDescriptors: [SortDescriptor(\.categoryId)]) var categories: FetchedResults<Category>
   
   
   var body: some View {
-    VStack(alignment: .leading, spacing: 0) {
-      
-      firstRowTitle()
-      
-      secondRow()
-      
-      ScrollView {
-       // Text(categoryVM.categories.first!.title)
+    
+    NavigationStack {
+      VStack(alignment: .leading, spacing: 0) {
         
+        firstRowTitle()
         
-        // 전체가 onTapGesture로 액션!
-        ForEach(categoryVM.categories, id: \.self) { category in
-          CategoryItem(category: category)
+        secondRow()
+        
+        ScrollView {
+          
+          
+          ForEach(categories, id: \.self) { category in
+            NavigationLink(destination: VocabListView(category: category)) {
+              CategoryItem(category: category)
+            }
+          }
         }
-        
       }
+      .padding(.horizontal, 20)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(backGradient())
+      .sheet(isPresented: $categoryVM.isAddOn, content: {
+        CategoryAddView()
+      })
     }
-    .padding(.horizontal, 20)
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(backGradient())
-    .sheet(isPresented: $categoryVM.isAddOn, content: {
-      CategoryAddView()
-    })
     
     
   }

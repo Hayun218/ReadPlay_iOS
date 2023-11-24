@@ -2,7 +2,7 @@
 //  Category+CoreDataProperties.swift
 //  ReadPlay
 //
-//  Created by yun on 11/23/23.
+//  Created by yun on 11/24/23.
 //
 //
 
@@ -21,7 +21,7 @@ extension Category {
     @NSManaged public var title: String
     @NSManaged public var totalNum: Int32
     @NSManaged public var studyDate: String?
-    @NSManaged public var vocabs: Set<Vocab>
+    @NSManaged public var vocabs: NSSet
 
 }
 

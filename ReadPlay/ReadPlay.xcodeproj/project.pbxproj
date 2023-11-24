@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		AE5DF1D42AF678710089FA92 /* elementaryVocab.json in Resources */ = {isa = PBXBuildFile; fileRef = AE5DF1D32AF678710089FA92 /* elementaryVocab.json */; };
+		AE663DE82B102895000532C2 /* Vocab+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE42B102895000532C2 /* Vocab+CoreDataClass.swift */; };
+		AE663DE92B102895000532C2 /* Vocab+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE52B102895000532C2 /* Vocab+CoreDataProperties.swift */; };
+		AE663DEA2B102895000532C2 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */; };
+		AE663DEB2B102895000532C2 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */; };
+		AE663DED2B102990000532C2 /* VocabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DEC2B102990000532C2 /* VocabListView.swift */; };
 		AEA0E68B2B0B872E004777A2 /* Ex+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68A2B0B872E004777A2 /* Ex+View.swift */; };
 		AEA0E68D2B0B878B004777A2 /* Ex+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68C2B0B878B004777A2 /* Ex+Color.swift */; };
 		AEA0E68F2B0B87CF004777A2 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68E2B0B87CF004777A2 /* CategoryView.swift */; };
@@ -29,14 +34,15 @@
 		AECA78642AF6713A00C8597F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECA78632AF6713A00C8597F /* DataController.swift */; };
 		AECA786A2AF674B500C8597F /* VocabModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AECA78682AF674B500C8597F /* VocabModel.xcdatamodeld */; };
 		AECA786D2AF675FD00C8597F /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECA786C2AF675FD00C8597F /* JsonParser.swift */; };
-		AEDA34E42B0E60AA00647AB0 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDA34E02B0E60AA00647AB0 /* Category+CoreDataClass.swift */; };
-		AEDA34E52B0E60AA00647AB0 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDA34E12B0E60AA00647AB0 /* Category+CoreDataProperties.swift */; };
-		AEDA34E62B0E60AA00647AB0 /* Vocab+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDA34E22B0E60AA00647AB0 /* Vocab+CoreDataClass.swift */; };
-		AEDA34E72B0E60AA00647AB0 /* Vocab+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDA34E32B0E60AA00647AB0 /* Vocab+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AE5DF1D32AF678710089FA92 /* elementaryVocab.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = elementaryVocab.json; sourceTree = "<group>"; };
+		AE663DE42B102895000532C2 /* Vocab+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vocab+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AE663DE52B102895000532C2 /* Vocab+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vocab+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AE663DEC2B102990000532C2 /* VocabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabListView.swift; sourceTree = "<group>"; };
 		AEA0E68A2B0B872E004777A2 /* Ex+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+View.swift"; sourceTree = "<group>"; };
 		AEA0E68C2B0B878B004777A2 /* Ex+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+Color.swift"; sourceTree = "<group>"; };
 		AEA0E68E2B0B87CF004777A2 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
@@ -60,10 +66,6 @@
 		AECA78632AF6713A00C8597F /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		AECA78692AF674B500C8597F /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		AECA786C2AF675FD00C8597F /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
-		AEDA34E02B0E60AA00647AB0 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
-		AEDA34E12B0E60AA00647AB0 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		AEDA34E22B0E60AA00647AB0 /* Vocab+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vocab+CoreDataClass.swift"; sourceTree = "<group>"; };
-		AEDA34E32B0E60AA00647AB0 /* Vocab+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vocab+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 		AECA78572AF6701000C8597F /* VocabList */ = {
 			isa = PBXGroup;
 			children = (
+				AE663DEC2B102990000532C2 /* VocabListView.swift */,
 			);
 			path = VocabList;
 			sourceTree = "<group>";
@@ -212,10 +215,10 @@
 		AECA78672AF6749800C8597F /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				AEDA34E02B0E60AA00647AB0 /* Category+CoreDataClass.swift */,
-				AEDA34E12B0E60AA00647AB0 /* Category+CoreDataProperties.swift */,
-				AEDA34E22B0E60AA00647AB0 /* Vocab+CoreDataClass.swift */,
-				AEDA34E32B0E60AA00647AB0 /* Vocab+CoreDataProperties.swift */,
+				AE663DE42B102895000532C2 /* Vocab+CoreDataClass.swift */,
+				AE663DE52B102895000532C2 /* Vocab+CoreDataProperties.swift */,
+				AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */,
+				AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */,
 				AECA78682AF674B500C8597F /* VocabModel.xcdatamodeld */,
 				AECA78632AF6713A00C8597F /* DataController.swift */,
 				AEA90F0E2B0CC26F00AC33D9 /* StaticVocab.swift */,
@@ -301,21 +304,22 @@
 				AECA786A2AF674B500C8597F /* VocabModel.xcdatamodeld in Sources */,
 				AEA0E6B02B0BA879004777A2 /* CategoryAddView.swift in Sources */,
 				AECA786D2AF675FD00C8597F /* JsonParser.swift in Sources */,
+				AE663DE82B102895000532C2 /* Vocab+CoreDataClass.swift in Sources */,
+				AE663DED2B102990000532C2 /* VocabListView.swift in Sources */,
 				AECA78642AF6713A00C8597F /* DataController.swift in Sources */,
 				AEA0E6AC2B0BA4AA004777A2 /* CustomButton.swift in Sources */,
+				AE663DE92B102895000532C2 /* Vocab+CoreDataProperties.swift in Sources */,
+				AE663DEA2B102895000532C2 /* Category+CoreDataClass.swift in Sources */,
 				AEA0E68B2B0B872E004777A2 /* Ex+View.swift in Sources */,
 				AEA0E68F2B0B87CF004777A2 /* CategoryView.swift in Sources */,
 				AEA0E6AE2B0BA796004777A2 /* CategoryViewModel.swift in Sources */,
-				AEDA34E52B0E60AA00647AB0 /* Category+CoreDataProperties.swift in Sources */,
-				AEDA34E62B0E60AA00647AB0 /* Vocab+CoreDataClass.swift in Sources */,
 				AECA78622AF670DB00C8597F /* StudyPlayViewModel.swift in Sources */,
-				AEDA34E42B0E60AA00647AB0 /* Category+CoreDataClass.swift in Sources */,
 				AECA785D2AF6709300C8597F /* StudyPlayView.swift in Sources */,
 				AEA0E68D2B0B878B004777A2 /* Ex+Color.swift in Sources */,
+				AE663DEB2B102895000532C2 /* Category+CoreDataProperties.swift in Sources */,
 				AEA0E6A62B0B9167004777A2 /* FontManager.swift in Sources */,
 				AEA0E6A82B0B929D004777A2 /* CategoryItem.swift in Sources */,
 				AEA90F0F2B0CC26F00AC33D9 /* StaticVocab.swift in Sources */,
-				AEDA34E72B0E60AA00647AB0 /* Vocab+CoreDataProperties.swift in Sources */,
 				AEA7E7162AE8256B0057D201 /* ReadPlayApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

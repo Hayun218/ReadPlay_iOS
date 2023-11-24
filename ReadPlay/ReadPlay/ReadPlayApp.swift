@@ -10,13 +10,7 @@ import SwiftUI
 @main
 struct ReadPlayApp: App {
   
-  @StateObject var dataController : DataController
-  
-  init() {
-    let dataController = DataController()
-    _dataController = StateObject(wrappedValue: dataController)
-  }
-  
+  let dataController = DataController.shared
   
   var body: some Scene {
     WindowGroup {

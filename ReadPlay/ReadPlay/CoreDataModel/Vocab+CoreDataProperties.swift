@@ -2,7 +2,7 @@
 //  Vocab+CoreDataProperties.swift
 //  ReadPlay
 //
-//  Created by yun on 11/23/23.
+//  Created by yun on 11/24/23.
 //
 //
 
@@ -19,6 +19,11 @@ extension Vocab {
     @NSManaged public var id: Int32
     @NSManaged public var meaning: String
     @NSManaged public var word: String
+    @NSManaged public var status: Int32
     @NSManaged public var category: Category
+
+}
+
+extension Vocab : Identifiable {
 
 }
