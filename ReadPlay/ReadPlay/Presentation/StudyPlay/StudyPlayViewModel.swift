@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class StudyPlayViewModel: ObservableObject {
-  @Published var elementaryVocab: [VocabListModel] = load(fileName: "elementaryVocab")
+  @Published var elementaryVocab: [StaticVocab] =  load(fileName: "elementaryVocab")
   @Published var wordIdx: Int = 0
   @Published var isDone = Bool()
   @Published var timer: Timer?

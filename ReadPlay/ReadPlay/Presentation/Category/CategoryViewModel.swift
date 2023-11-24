@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import CoreData
 
 class CategoryViewModel: ObservableObject {
-  @Published var isAddOn = Bool()
   
+
+  @Published var isAddOn = Bool()
+
   func addClicked() {
     self.isAddOn.toggle()
   }
+
   
 }
 

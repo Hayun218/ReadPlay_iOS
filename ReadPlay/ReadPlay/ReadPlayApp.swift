@@ -9,11 +9,16 @@ import SwiftUI
 
 @main
 struct ReadPlayApp: App {
-    var body: some Scene {
-        WindowGroup {
-          NavigationStack() {
-            CategoryView()
-          }
-        }
+  
+  let dataController = DataController.shared
+  
+  var body: some Scene {
+    WindowGroup {
+      NavigationStack() {
+        CategoryView()
+          .environment(\.managedObjectContext, dataController.container.viewContext)
+          .environmentObject(dataController)
+      }
     }
+  }
 }
