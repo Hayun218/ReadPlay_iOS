@@ -10,10 +10,19 @@ import SwiftUI
 struct VocabListView: View {
   var category: Category
   
-  
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  var body: some View {
+    var vocabs = Array(category.vocabs) as! [Vocab]
+    
+    Text(category.title)
+    
+    ScrollView {
+      
+      ForEach(vocabs, id: \.self) { vocab in
+        Text(vocab.word)
+        
+      }
     }
+  }
 }
 
 //#Preview {
