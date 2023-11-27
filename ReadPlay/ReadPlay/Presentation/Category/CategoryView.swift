@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct CategoryView: View {
+  @Environment(\.dismiss) private var dismiss
   @Environment(\.managedObjectContext) var managedObjectContext
-  //  @StateObject var dataController = DataController.shared
   @EnvironmentObject var dataController : DataController
-  @StateObject var categoryVM = CategoryViewModel()
+  @StateObject var categoryVM = CategoryViewModel.shared
   @FetchRequest(sortDescriptors: [SortDescriptor(\.categoryId)]) var categories: FetchedResults<Category>
-  
   
   var body: some View {
     
@@ -26,23 +25,35 @@ struct CategoryView: View {
         
         ScrollView {
           
-          
           ForEach(categories, id: \.self) { category in
-            NavigationLink(destination: VocabListView(category: category)) {
-              CategoryItem(category: category)
-            }
+            CategoryItem(category: category)
           }
         }
       }
-      .padding(.horizontal, 20)
+      .padding(.trailing, 20)
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(backGradient())
       .sheet(isPresented: $categoryVM.isAddOn, content: {
         CategoryAddView()
       })
+      .fullScreenCover(isPresented: $categoryVM.isEditSheetOn, content: {
+        // edit View
+      })
+      .alert("단어장이 삭제됩니다", isPresented: $categoryVM.isDeleteAlertOn, actions: {
+        Button {
+          if let category = categoryVM.selectedCategory {
+            dataController.deleteCategory(category: category, context: managedObjectContext)
+          }
+        } label: {
+          Text("삭제")
+        }
+        Button(role: .cancel, action: {}, label: {
+          Text("취소")
+        })
+      }, message: {
+        Text("삭제된 단어장은\n복원되지 않습니다")
+      })
     }
-    
-    
   }
 }
 
@@ -59,6 +70,7 @@ extension CategoryView {
       })
     }
     .padding(.vertical, 25)
+    .padding(.leading, 20)
     .foregroundStyle(.textWhite)
   }
   
@@ -75,6 +87,7 @@ extension CategoryView {
     .customFont(.caption3)
     .foregroundStyle(.textWhite)
     .padding(.bottom, 12)
+    .padding(.leading, 20)
   }
 }
 

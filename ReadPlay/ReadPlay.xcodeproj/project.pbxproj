@@ -13,6 +13,7 @@
 		AE663DEA2B102895000532C2 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */; };
 		AE663DEB2B102895000532C2 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */; };
 		AE663DED2B102990000532C2 /* VocabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DEC2B102990000532C2 /* VocabListView.swift */; };
+		AE7445882B14AA71005CDC05 /* UINavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7445872B14AA71005CDC05 /* UINavigation.swift */; };
 		AEA0E68B2B0B872E004777A2 /* Ex+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68A2B0B872E004777A2 /* Ex+View.swift */; };
 		AEA0E68D2B0B878B004777A2 /* Ex+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68C2B0B878B004777A2 /* Ex+Color.swift */; };
 		AEA0E68F2B0B87CF004777A2 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68E2B0B87CF004777A2 /* CategoryView.swift */; };
@@ -43,6 +44,7 @@
 		AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AE663DEC2B102990000532C2 /* VocabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabListView.swift; sourceTree = "<group>"; };
+		AE7445872B14AA71005CDC05 /* UINavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigation.swift; sourceTree = "<group>"; };
 		AEA0E68A2B0B872E004777A2 /* Ex+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+View.swift"; sourceTree = "<group>"; };
 		AEA0E68C2B0B878B004777A2 /* Ex+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+Color.swift"; sourceTree = "<group>"; };
 		AEA0E68E2B0B87CF004777A2 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				AEA0E6A52B0B9167004777A2 /* FontManager.swift */,
 				AEA0E68A2B0B872E004777A2 /* Ex+View.swift */,
 				AEA0E68C2B0B878B004777A2 /* Ex+Color.swift */,
+				AE7445872B14AA71005CDC05 /* UINavigation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				AEA0E68F2B0B87CF004777A2 /* CategoryView.swift in Sources */,
 				AEA0E6AE2B0BA796004777A2 /* CategoryViewModel.swift in Sources */,
 				AECA78622AF670DB00C8597F /* StudyPlayViewModel.swift in Sources */,
+				AE7445882B14AA71005CDC05 /* UINavigation.swift in Sources */,
 				AECA785D2AF6709300C8597F /* StudyPlayView.swift in Sources */,
 				AEA0E68D2B0B878B004777A2 /* Ex+Color.swift in Sources */,
 				AE663DEB2B102895000532C2 /* Category+CoreDataProperties.swift in Sources */,
