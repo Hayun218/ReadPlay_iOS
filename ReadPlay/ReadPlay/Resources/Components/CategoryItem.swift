@@ -8,37 +8,113 @@
 import SwiftUI
 
 struct CategoryItem: View {
+  @State private var offset: CGFloat = 0
+  @StateObject var categoryVM = CategoryViewModel.shared
+  @GestureState private var gestureOffset: CGFloat = 0
+  @State private var showOpt = Bool()
+  
+  let offsetWidth = UIScreen.main.bounds.size.width/3
+  
   var category: Category
   
   var body: some View {
     
-    VStack(alignment: .leading, spacing: 0) {
+    NavigationLink {
+      VocabListView(category: category)
+    } label: {
       
-      titleText()
-      
-      HStack(alignment: .bottom) {
+      VStack(alignment: .leading, spacing: 0) {
         
-        progressBar()
+        titleText()
         
-        Spacer()
-        
-        navigateButton()
+        HStack(alignment: .bottom) {
+          
+          progressBar()
+          
+          Spacer()
+          
+          navigateButton()
+        }
+        .padding(.bottom, 14)
       }
-      
-      .padding(.bottom, 14)
-      
+      .frame(maxWidth: .infinity)
+      .frame(height: 100)
+      .background(
+        RoundedRectangle(cornerRadius: 10)
+          .foregroundStyle(.surface)
+      )
+      .padding(.leading, showOpt ? 0 : 20)
+      .offset(x: offset)
+      .gesture(swipeGesture)
     }
-    .frame(maxWidth: .infinity)
-    .frame(height: 100)
-    .background(
-      RoundedRectangle(cornerRadius: 16)
-        .foregroundStyle(.surface)
+    .overlay(
+      showOpt ?
+      HStack(spacing: 0) {
+        editButton()
+        deleteButton()
+      }
+        .offset(x: offsetWidth-10)
+        .frame(maxWidth: offsetWidth-5, alignment: .trailing)
+        .frame(height: 100)
+      
+      : nil
     )
-    
   }
 }
 
 extension CategoryItem {
+  
+  private var swipeGesture: some Gesture {
+    DragGesture()
+      .updating($gestureOffset) { value, state, _ in
+        state = value.translation.width
+      }
+      .onChanged { value in
+        withAnimation {
+          offset = value.translation.width + gestureOffset
+        }
+      }
+      .onEnded { value in
+        let finalOffset = value.translation.width + gestureOffset
+        withAnimation {
+          if finalOffset < -offsetWidth {
+            offset = -offsetWidth
+            showOpt = true
+          } else {
+            offset = 0
+            showOpt = false
+          }
+        }
+      }
+  }
+  
+  private func deleteButton() -> some View {
+    return Button(action: { categoryVM.isDeleteClicked(category: category) }, label: {
+      Image(systemName: "trash")
+        .font(.system(size: 20))
+        .foregroundStyle(.white)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+          RoundedRectangle(cornerRadius: 10)
+            .foregroundStyle(.redButton)
+        )
+        .padding(.leading, 3)
+    })
+  }
+  
+  private func editButton() -> some View {
+    return Button(action: { categoryVM.isEditClicked(category: category) }, label: {
+      Image(systemName: "pencil")
+        .font(.system(size: 20))
+        .foregroundStyle(.white)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+          RoundedRectangle(cornerRadius: 10)
+            .foregroundStyle(.greenButton)
+        )
+        .padding(.horizontal, 3)
+    })
+  }
   
   private func titleText() -> some View {
     return  HStack(spacing: 15) {
@@ -75,8 +151,9 @@ extension CategoryItem {
     .padding(.trailing, 15)
     .customFont(myFont.caption1)
     .foregroundStyle(.textBlack)
-    
   }
+  
+  
 }
 
 //#Preview {
