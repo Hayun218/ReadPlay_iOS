@@ -27,6 +27,7 @@ struct CategoryView: View {
           
           ForEach(categories, id: \.self) { category in
             CategoryItem(category: category)
+              .environment(\.managedObjectContext, managedObjectContext)
           }
         }
       }

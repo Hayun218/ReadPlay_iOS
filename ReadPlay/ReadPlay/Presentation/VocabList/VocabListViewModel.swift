@@ -10,16 +10,32 @@ import SwiftUI
 class VocabListViewModel: ObservableObject {
   
   static let shared = VocabListViewModel()
-
+  
   @Published var isDeleteAlerttOn = Bool()
   @Published var selectedVocab: Vocab?
-  @Published var selectedVocabIdx: Int?
-  
+  @Published var selectedStatus: VocabStatus = .all
   @Published var restore = Bool()
   
+  @Published var status: Int = 1
+  
+  func updateStatus(vocab: Vocab) -> Int {
+    status = Int(vocab.status)
+    if vocab.status + 1 > 3 {
+      self.status = 1
+      vocab.status = 1
+    } else {
+      self.status += 1
+    }
+    return self.status
+  }
+  
+  
+  func selectStatus(status: VocabStatus) {
+    self.selectedStatus = status
+  }
+  
   func isDeleteClikced(vocab: Vocab, idx: Int) {
-    self.selectedVocab = vocab
-    self.selectedVocabIdx = idx-1
+    selectedVocab = vocab
     isDeleteAlerttOn.toggle()
   }
   

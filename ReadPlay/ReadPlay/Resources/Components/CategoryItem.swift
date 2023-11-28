@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryItem: View {
+  @Environment(\.managedObjectContext) var managedObjectContext
   @State private var offset: CGFloat = 0
   @StateObject var categoryVM = CategoryViewModel.shared
   @GestureState private var gestureOffset: CGFloat = 0
@@ -21,6 +22,8 @@ struct CategoryItem: View {
     
     NavigationLink {
       VocabListView(category: category)
+        .environment(\.managedObjectContext, managedObjectContext)
+      
     } label: {
       
       VStack(alignment: .leading, spacing: 0) {

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct VocabItem: View {
+  @StateObject var dataController = DataController.shared
+  
   @State private var offset: CGFloat = 0
   @StateObject var vocabVM = VocabListViewModel.shared
   @GestureState private var gestureOffset: CGFloat = 0
@@ -16,9 +18,19 @@ struct VocabItem: View {
   
   let offsetWidth = UIScreen.main.bounds.size.width/2.5
   
-  
-  var vocab: Vocab
+  @State var vocab: Vocab
   let vocabId: Int
+  
+  init(vocab: Vocab, vocabId: Int) {
+    self._vocab = State(initialValue: vocab)
+    self.vocabId = vocabId
+  }
+  
+  init(vocab: Vocab) {
+    self._vocab = State(initialValue: vocab)
+    self.vocabId = Int(_vocab.wrappedValue.id)
+  }
+  
   
   var body: some View {
     
@@ -50,6 +62,11 @@ struct VocabItem: View {
     .gesture(swipeGesture)
     
     .onAppear {
+      if vocab.id != Int32(vocabId) {
+        vocab.id = Int32(vocabId)
+        dataController.save(context: dataController.context)
+      }
+      
       if vocabId < 10 {
         vocabModifier = "00"
       } else if vocabId < 100 {
@@ -76,7 +93,7 @@ struct VocabItem: View {
       self.showOpt = false
       self.offset = 0
     })
-    
+   
   }
 }
 
@@ -88,7 +105,8 @@ extension VocabItem {
       Spacer()
       
       Button {
-        print("status: \(vocab.status)")
+        vocab.status = Int32(vocabVM.updateStatus(vocab: vocab))
+        dataController.save(context: dataController.context)
       } label: {
         Circle()
           .stroke(.gray200, lineWidth: 1.4)
