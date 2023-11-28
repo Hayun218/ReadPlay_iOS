@@ -131,12 +131,12 @@ extension CategoryItem {
   
   private func progressBar() -> some View {
     return VStack(alignment: .leading) {
-      Text("\(Int(category.progress)) / \(Int(category.totalNum))")
+      Text("\(Int(category.progress)) / \(Int(category.vocabs.count))")
         .customFont(myFont.caption1)
         .foregroundStyle(.gray300)
-      ProgressView(value: Double(category.progress), total: Double(category.totalNum))
+      ProgressView(value: Double(category.progress), total: Double(category.vocabs.count))
         .overlay(progressGradient())
-        .mask(ProgressView(value: Double(category.progress), total: Double(category.totalNum)))
+        .mask(ProgressView(value: Double(category.progress), total: Double(category.vocabs.count)))
         .scaleEffect(x: 1, y: 1.4, anchor: .center)
         .frame(width: 100)
     }

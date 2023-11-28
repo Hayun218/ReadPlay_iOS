@@ -14,7 +14,7 @@ struct CustomButton: View {
   var body: some View {
     HStack(spacing: 5) {
       Text(text)
-        .customFont(myFont.caption1)
+        .customFont(.caption1)
       
       Image(systemName: icon)
         .font(.system(size: 18, weight: .bold))

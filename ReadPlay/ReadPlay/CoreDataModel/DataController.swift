@@ -28,7 +28,7 @@ final class DataController: ObservableObject {
     
     context = container.viewContext
     
-    //resetCoreData()
+    resetCoreData()
     
     fetchCategory()
     if fetchedCategories.isEmpty {
@@ -57,16 +57,16 @@ final class DataController: ObservableObject {
     let staticCategory = Category(context: context)
     staticCategory.categoryId = 1
     staticCategory.title = "초등 필수 영단어"
-    staticCategory.totalNum = Int32(staticVocab.count)
     
     for vocab in staticVocab {
-      saveVocab(category: staticCategory, wordId: Int32(vocab.word_id), meaning: vocab.meaning, word: vocab.meaning, context: context)
+      saveVocab(category: staticCategory, wordId: Int32(vocab.word_id), meaning: vocab.meaning, word: vocab.word, context: context)
     }
   }
   
   // MARK: - CREATE
   
   // 전체 카테고리 생성 및 단어리스트 저장
+  // TODO: category 관련 createdDate 처리하기
   func saveCategory(categoryId: Int32, title: String, newVocabs: [Vocab], context: NSManagedObjectContext) {
     let category = Category(context: context)
     let newId: Int32 = fetchedCategories.last!.categoryId+1
@@ -84,6 +84,7 @@ final class DataController: ObservableObject {
     vocab.id = wordId
     vocab.meaning = meaning
     vocab.word = word
+    vocab.status = 1
     
     category.addToVocabs(vocab)
     
@@ -93,7 +94,6 @@ final class DataController: ObservableObject {
   private func saveNewCategoryVocabs(newCategory: Category, newId: Int32, newVocabs: [Vocab], context: NSManagedObjectContext) {
     
     newCategory.categoryId = newId
-    newCategory.totalNum = Int32(newVocabs.count)
     newCategory.progress = 0
     
     for vocab in newVocabs {
@@ -146,6 +146,7 @@ final class DataController: ObservableObject {
   // 한 단어 삭제
   func deleteVocab(vocab: Vocab, context: NSManagedObjectContext) {
     context.delete(vocab)
+    print("deleted a vocab")
     save(context: context)
   }
   

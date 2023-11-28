@@ -19,7 +19,7 @@ extension Category {
     @NSManaged public var categoryId: Int32
     @NSManaged public var progress: Int32
     @NSManaged public var title: String
-    @NSManaged public var totalNum: Int32
+    @NSManaged public var createdDate: String
     @NSManaged public var studyDate: String?
     @NSManaged public var vocabs: NSSet
 
