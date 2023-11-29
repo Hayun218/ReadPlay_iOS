@@ -105,8 +105,9 @@ extension VocabItem {
       Spacer()
       
       Button {
-        vocab.status = Int32(vocabVM.updateStatus(vocab: vocab))
-        dataController.save(context: dataController.context)
+        dataController.updateStatusVocab(vocab: vocab, status: Int32(vocabVM.updateStatus(vocab: vocab)), context: dataController.context)
+//        vocab.status = Int32(vocabVM.updateStatus(vocab: vocab))
+//        dataController.save(context: dataController.context)
       } label: {
         Circle()
           .stroke(.gray200, lineWidth: 1.4)
@@ -168,7 +169,7 @@ extension VocabItem {
   }
   
   private func deleteButton() -> some View {
-    return Button(action: { vocabVM.isDeleteClikced(vocab: vocab, idx: vocabId) }, label: {
+    return Button(action: { vocabVM.isDeleteClikced(vocab: vocab) }, label: {
       Image(systemName: "trash")
         .font(.system(size: 20))
         .foregroundStyle(.white)
@@ -181,7 +182,7 @@ extension VocabItem {
   }
   
   private func editButton() -> some View {
-    return Button(action: { print("offset: \(offset) , offsetWidth: \(offsetWidth)") }, label: {
+    return Button(action: { vocabVM.isEditClicked(vocab: vocab) }, label: {
       Image(systemName: "pencil")
         .font(.system(size: 20))
         .foregroundStyle(.white)

@@ -40,14 +40,24 @@ struct VocabListView: View {
         HStack(alignment: .center) {
           
           Text("\(fetchedVocabs.count)개 단어\n생성일: - \(category.createdDate)")
-            .lineSpacing(-0.8)
+            .lineSpacing(-0.3)
             .customFont(.caption1)
             .foregroundStyle(.textWhite)
           
-          
           Spacer()
           
-          CustomButton(text: "학습하기", icon: "play.circle")
+          NavigationLink {
+            if vocabVM.selectedStatus == .all {
+              StudyPlayView(fetchedVocabs: Array(fetchedVocabs), selectedStatus: vocabVM.selectedStatus)
+            } else {
+              let filteredVocabs = fetchedVocabs.filter {$0.status == vocabVM.selectedStatus.rawValue}
+              StudyPlayView(fetchedVocabs: filteredVocabs, selectedStatus: vocabVM.selectedStatus)
+            }
+          } label: {
+            CustomButton(text: "학습하기", icon: "play.circle")
+          }
+
+         
         }
         .padding(.bottom, 20)
         
@@ -58,14 +68,14 @@ struct VocabListView: View {
       .padding(.horizontal, 20)
       .padding(.vertical, 16)
       .frame(maxWidth: .infinity)
-      .frame(height: screenHeight/4.8)
+      .frame(height: screenHeight/5)
       
       ScrollView {
         LazyVStack(spacing: 0) {
           
           if vocabVM.selectedStatus == .all {
-            ForEach(Array(zip(fetchedVocabs.indices, fetchedVocabs)), id: \.0) { index, vocab in
-                VocabItem(vocab: vocab, vocabId: index + 1)
+            ForEach(Array(fetchedVocabs.enumerated()), id: \.element) { idx, vocab in
+              VocabItem(vocab: vocab, vocabId: idx + 1)
             }
           } else {
             ForEach(fetchedVocabs.filter {$0.status == vocabVM.selectedStatus.rawValue}, id: \.self) { vocab in
@@ -75,7 +85,18 @@ struct VocabListView: View {
         }
       }
     }
+    // 단어 수정
+    .alert("단어 수정하기", isPresented: $vocabVM.isEditOn) {
+      TextField("단어", text: $vocabVM.editedWord)
+      TextField("뜻", text: $vocabVM.editedMeaning)
+      Button("취소", role: .cancel, action: { vocabVM.restoreOffset() })
+      Button("확인") {
+        dataController.updateVocab(vocab: vocabVM.selectedVocab!, meaning: vocabVM.editedMeaning, word: vocabVM.editedWord, context: managedObjectContext)
+        vocabVM.restoreOffset()
+      }
+    }
     
+    // 단어 삭제 알림
     .alert("단어가 삭제됩니다", isPresented: $vocabVM.isDeleteAlerttOn, actions: {
       Button {
         if let vocab = vocabVM.selectedVocab {
@@ -85,12 +106,15 @@ struct VocabListView: View {
       } label: {
         Text("삭제")
       }
-      Button(role: .cancel, action: {}, label: {
+      Button(role: .cancel, action: {}) {
         Text("취소")
-      })
+      }
     }, message: {
       Text("삭제된 단어는 복원되지 않습니다")
     })
+    .onAppear {
+      vocabVM.restoreOffset()
+    }
     .background(backGradient())
     .navigationBarBackButtonHidden()
   }
