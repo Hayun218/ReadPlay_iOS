@@ -28,7 +28,7 @@ final class DataController: ObservableObject {
     
     context = container.viewContext
     
-    //resetCoreData()
+    resetCoreData()
     
     fetchCategory()
     if fetchedCategories.isEmpty {
@@ -48,7 +48,7 @@ final class DataController: ObservableObject {
       }
     }
   }
-
+  
   // MARK: - DEFAULT CREATE
   
   private func saveDefaultCategory() {
@@ -56,11 +56,11 @@ final class DataController: ObservableObject {
     let staticVocab: [StaticVocab] = load(fileName: "elementaryVocab")
     let staticCategory = Category(context: context)
     staticCategory.categoryId = 1
+    staticCategory.createdDate = getCurrentDateTime()
     staticCategory.title = "초등 필수 영단어"
-    staticCategory.totalNum = Int32(staticVocab.count)
     
     for vocab in staticVocab {
-      saveVocab(category: staticCategory, wordId: Int32(vocab.word_id), meaning: vocab.meaning, word: vocab.meaning, context: context)
+      saveVocab(category: staticCategory, wordId: Int32(vocab.word_id), meaning: vocab.meaning, word: vocab.word, context: context)
     }
   }
   
@@ -70,7 +70,7 @@ final class DataController: ObservableObject {
   func saveCategory(categoryId: Int32, title: String, newVocabs: [Vocab], context: NSManagedObjectContext) {
     let category = Category(context: context)
     let newId: Int32 = fetchedCategories.last!.categoryId+1
-    
+    category.createdDate = getCurrentDateTime()
     category.categoryId = categoryId
     category.title = title
     
@@ -84,6 +84,7 @@ final class DataController: ObservableObject {
     vocab.id = wordId
     vocab.meaning = meaning
     vocab.word = word
+    vocab.status = 1
     
     category.addToVocabs(vocab)
     
@@ -93,7 +94,6 @@ final class DataController: ObservableObject {
   private func saveNewCategoryVocabs(newCategory: Category, newId: Int32, newVocabs: [Vocab], context: NSManagedObjectContext) {
     
     newCategory.categoryId = newId
-    newCategory.totalNum = Int32(newVocabs.count)
     newCategory.progress = 0
     
     for vocab in newVocabs {
@@ -111,11 +111,11 @@ final class DataController: ObservableObject {
       print("error fetching \(error.localizedDescription)")
     }
   }
-
+  
   
   // MARK: - UPDATE
   func updateVocab(vocab: Vocab, meaning: String, word: String, context: NSManagedObjectContext) {
-        
+    
     vocab.meaning = meaning
     vocab.word = word
     
@@ -125,15 +125,28 @@ final class DataController: ObservableObject {
   func updateStatusVocab(vocab: Vocab, status: Int32, context: NSManagedObjectContext) {
     vocab.status = status
     
+    updateProgress(category: vocab.category)
+
     save(context: context)
   }
+  
+  private func updateProgress(category: Category) {
+    let statusPredicate = NSPredicate(format: "status == %@", argumentArray: [3])
+    
+    let filteredVocabs = category.vocabs.filtered(using: statusPredicate)
+    let countOfStatus3 = filteredVocabs.count
+    
+    category.progress = Int32(countOfStatus3)
+    
+  }
+  
   
   // 카테고리 전체 수정 -> 하면서 하기
   func updateCategory(category: Category, title: String, vocabs: [Vocab], context: NSManagedObjectContext) {
     
     category.title = title
   }
-
+  
   
   // MARK: - DELETE
   
@@ -145,6 +158,9 @@ final class DataController: ObservableObject {
   
   // 한 단어 삭제
   func deleteVocab(vocab: Vocab, context: NSManagedObjectContext) {
+    if vocab.status == 3 {
+      vocab.category.progress -= 1
+    }
     context.delete(vocab)
     save(context: context)
   }
@@ -166,7 +182,7 @@ final class DataController: ObservableObject {
   
   
   // 뷰모델에서 진행,,
-  func getCurrentDateTime() -> String {
+  private func getCurrentDateTime() -> String {
     let formatter = DateFormatter() //객체 생성
     formatter.dateStyle = .long
     formatter.timeStyle = .medium

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryItem: View {
+  @Environment(\.managedObjectContext) var managedObjectContext
   @State private var offset: CGFloat = 0
   @StateObject var categoryVM = CategoryViewModel.shared
   @GestureState private var gestureOffset: CGFloat = 0
@@ -21,6 +22,8 @@ struct CategoryItem: View {
     
     NavigationLink {
       VocabListView(category: category)
+        .environment(\.managedObjectContext, managedObjectContext)
+      
     } label: {
       
       VStack(alignment: .leading, spacing: 0) {
@@ -131,12 +134,12 @@ extension CategoryItem {
   
   private func progressBar() -> some View {
     return VStack(alignment: .leading) {
-      Text("\(Int(category.progress)) / \(Int(category.totalNum))")
+      Text("\(Int(category.progress)) / \(Int(category.vocabs.count))")
         .customFont(myFont.caption1)
         .foregroundStyle(.gray300)
-      ProgressView(value: Double(category.progress), total: Double(category.totalNum))
+      ProgressView(value: Double(category.progress), total: Double(category.vocabs.count))
         .overlay(progressGradient())
-        .mask(ProgressView(value: Double(category.progress), total: Double(category.totalNum)))
+        .mask(ProgressView(value: Double(category.progress), total: Double(category.vocabs.count)))
         .scaleEffect(x: 1, y: 1.4, anchor: .center)
         .frame(width: 100)
     }
