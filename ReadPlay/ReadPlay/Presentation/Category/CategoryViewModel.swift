@@ -17,6 +17,13 @@ class CategoryViewModel: ObservableObject {
   @Published var selectedCategory: Category? = nil
   @Published var isDeleteAlertOn = Bool()
   @Published var isEditSheetOn = Bool()
+  @Published var editedTitle: String = ""
+  @Published var restoreOffset = Bool()
+  
+  
+  func restoreOffsetToggle() {
+    restoreOffset.toggle()
+  }
   
   func addClicked() {
     self.isAddOn.toggle()
@@ -24,6 +31,7 @@ class CategoryViewModel: ObservableObject {
   
   func isEditClicked(category: Category) {
     selectedCategory = category
+    editedTitle = category.title
     isEditSheetOn.toggle()
   }
   

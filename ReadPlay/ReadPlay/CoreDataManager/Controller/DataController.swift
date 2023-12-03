@@ -67,12 +67,13 @@ final class DataController: ObservableObject {
   // MARK: - CREATE
   
   // 전체 카테고리 생성 및 단어리스트 저장
-  func saveCategory(categoryId: Int32, title: String, newVocabs: [Vocab], context: NSManagedObjectContext) {
+  func saveCategory(title: String, newVocabs: [Vocab], context: NSManagedObjectContext) {
     let category = Category(context: context)
     let newId: Int32 = fetchedCategories.last!.categoryId+1
     category.createdDate = getCurrentDateTime()
-    category.categoryId = categoryId
+    category.categoryId = newId
     category.title = title
+    category.progress = 0
     
     saveNewCategoryVocabs(newCategory: category, newId: newId, newVocabs: newVocabs, context: context)
   }
@@ -93,8 +94,6 @@ final class DataController: ObservableObject {
   
   private func saveNewCategoryVocabs(newCategory: Category, newId: Int32, newVocabs: [Vocab], context: NSManagedObjectContext) {
     
-    newCategory.categoryId = newId
-    newCategory.progress = 0
     
     for vocab in newVocabs {
       saveVocab(category: newCategory, wordId: Int32(vocab.id), meaning: vocab.meaning, word: vocab.word, context: context)
@@ -137,7 +136,11 @@ final class DataController: ObservableObject {
     let countOfStatus3 = filteredVocabs.count
     
     category.progress = Int32(countOfStatus3)
-    
+  }
+  
+  func updateCategoryTitle(category: Category, title: String, context: NSManagedObjectContext) {
+    category.title = title
+    save(context: context)
   }
   
   

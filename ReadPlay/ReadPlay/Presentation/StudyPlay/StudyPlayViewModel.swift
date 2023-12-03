@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class StudyPlayViewModel: ObservableObject {
-  let vocabs: [Vocab]
+  let displayedVocabs: [String]
   @Published var wordIdx: Int = 0
   @Published var isDone = Bool()
   @Published var timer: Timer?
@@ -16,12 +16,12 @@ final class StudyPlayViewModel: ObservableObject {
   @Published var timeInterval: TimeInterval = 1.0
   @Published var isPressing = Bool()
   
-  init(vocabs: [Vocab]) {
-    self.vocabs = vocabs
+  init(vocabs: [String]) {
+    self.displayedVocabs = vocabs
   }
   
   func increaseIdx() {
-    if self.wordIdx == vocabs.count - 1 {
+    if self.wordIdx == displayedVocabs.count - 1 {
       self.isDone = true
       stopTimer()
     } else {

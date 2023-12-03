@@ -15,12 +15,33 @@ struct StudyPlayView: View {
   
   let screenHeight = UIScreen.main.bounds.size.height
   let fetchedVocabs: Array<Vocab>
+  let studyOpt: Int
+  var displayedVocabs: Array<String> = []
   let selectedStatus: VocabStatus
   
-  init(fetchedVocabs: [Vocab], selectedStatus: VocabStatus) {
+  init(fetchedVocabs: [Vocab], selectedStatus: VocabStatus, studyOpt: Int) {
     self.fetchedVocabs = fetchedVocabs
     self.selectedStatus = selectedStatus
-    _studyPlayVM = StateObject(wrappedValue: StudyPlayViewModel(vocabs: fetchedVocabs))
+    self.studyOpt = studyOpt
+    
+    if fetchedVocabs.isEmpty {
+      displayedVocabs.append("X 학습 단어 X")
+    } else {
+      // 영어만
+      if studyOpt == 1 {
+        displayedVocabs = fetchedVocabs.map {$0.word}
+      } else if studyOpt == 2 { // 한국어만
+        displayedVocabs = fetchedVocabs.map {$0.meaning}
+      } else { // 둘다
+        for vocab in fetchedVocabs {
+          displayedVocabs.append(vocab.word)
+          displayedVocabs.append(vocab.meaning)
+        }
+      }
+    }
+    let vocabs = self.displayedVocabs
+    _studyPlayVM = StateObject(wrappedValue: StudyPlayViewModel(vocabs: vocabs))
+    
   }
   
   var body: some View {
@@ -28,11 +49,17 @@ struct StudyPlayView: View {
       
       backButton
       
-      if fetchedVocabs.isEmpty {
-        
-      } else {
-        
-        Text(fetchedVocabs[studyPlayVM.wordIdx].word)
+        VStack {
+          
+          vocabIdx
+          
+          Spacer()
+          
+          Text(displayedVocabs[studyPlayVM.wordIdx])
+            .customFont(.learningText)
+            .foregroundStyle(.textBlack)
+          Spacer()
+        }
           .frame(maxWidth: .infinity)
           .frame(height: screenHeight/2)
           .background(
@@ -42,7 +69,7 @@ struct StudyPlayView: View {
           )
           .padding(.horizontal, 32)
           .padding(.top, 55)
-      }
+      
       
       Spacer()
       
@@ -104,6 +131,13 @@ struct StudyPlayView: View {
   }
 }
 extension StudyPlayView {
+  
+  private var vocabIdx: some View {
+    Text(fetchedVocabs.isEmpty ? "0 / 0" : "\(studyPlayVM.wordIdx) / \(displayedVocabs.count)")
+      .customFont(.body1)
+      .foregroundStyle(.gray300)
+      .padding(.top, 20)
+  }
   private var backButton: some View {
     HStack {
       Button(action: { dismiss() }, label: {
@@ -115,5 +149,6 @@ extension StudyPlayView {
       Spacer()
     }
     .padding(.horizontal, 20)
+    .padding(.vertical, 16)
   }
 }

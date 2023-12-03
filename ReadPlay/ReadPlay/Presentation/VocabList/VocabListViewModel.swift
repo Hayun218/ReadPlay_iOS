@@ -13,15 +13,25 @@ class VocabListViewModel: ObservableObject {
   
   @Published var isDeleteAlerttOn = Bool()
   @Published var isEditOn = Bool()
+  @Published var isStudyOn = Bool()
+  @Published var isNavigateStudyOn = Bool()
   @Published var editedWord: String = ""
   @Published var editedMeaning: String = ""
   @Published var selectedVocab: Vocab?
   @Published var selectedStatus: VocabStatus = .all
   @Published var restore = Bool()
- 
- 
+  @Published var studyOpt: Int = 3
+  
   
   @Published var status: Int = 1
+  
+  func navigateToStudy() {
+    isNavigateStudyOn.toggle()
+  }
+  
+  func studyButtonClicked() {
+    self.isStudyOn.toggle()
+  }
   
   func isEditClicked(vocab: Vocab) {
     self.selectedVocab = vocab

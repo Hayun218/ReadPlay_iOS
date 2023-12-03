@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE11A10A2B18B2F500D3716C /* CategoryAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE11A1092B18B2F500D3716C /* CategoryAddViewModel.swift */; };
 		AE2509EF2B15D38600E36483 /* VocabListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2509EE2B15D38600E36483 /* VocabListViewModel.swift */; };
 		AE2509F12B162BF800E36483 /* StatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2509F02B162BF800E36483 /* StatusButton.swift */; };
 		AE5DF1D42AF678710089FA92 /* elementaryVocab.json in Resources */ = {isa = PBXBuildFile; fileRef = AE5DF1D32AF678710089FA92 /* elementaryVocab.json */; };
@@ -17,7 +18,6 @@
 		AE663DED2B102990000532C2 /* VocabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DEC2B102990000532C2 /* VocabListView.swift */; };
 		AE6C35742B158BED00CF9A9A /* VocabStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C35732B158BED00CF9A9A /* VocabStatus.swift */; };
 		AE7445882B14AA71005CDC05 /* Ex+UINavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7445872B14AA71005CDC05 /* Ex+UINavigation.swift */; };
-		AE968C242B1737D500D233DF /* EditVocabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE968C232B1737D500D233DF /* EditVocabView.swift */; };
 		AE9FA86D2B14B93B00C29D18 /* VocabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9FA86C2B14B93B00C29D18 /* VocabItem.swift */; };
 		AEA0E68B2B0B872E004777A2 /* Ex+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68A2B0B872E004777A2 /* Ex+View.swift */; };
 		AEA0E68D2B0B878B004777A2 /* Ex+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68C2B0B878B004777A2 /* Ex+Color.swift */; };
@@ -35,6 +35,7 @@
 		AEA7E71A2AE8256C0057D201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEA7E7192AE8256C0057D201 /* Assets.xcassets */; };
 		AEA7E71D2AE8256C0057D201 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEA7E71C2AE8256C0057D201 /* Preview Assets.xcassets */; };
 		AEA90F0F2B0CC26F00AC33D9 /* StaticVocab.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA90F0E2B0CC26F00AC33D9 /* StaticVocab.swift */; };
+		AEC7166D2B1853A100981BAE /* StudyOpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC7166C2B1853A100981BAE /* StudyOpt.swift */; };
 		AECA785D2AF6709300C8597F /* StudyPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECA785C2AF6709300C8597F /* StudyPlayView.swift */; };
 		AECA78622AF670DB00C8597F /* StudyPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECA78612AF670DB00C8597F /* StudyPlayViewModel.swift */; };
 		AECA78642AF6713A00C8597F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECA78632AF6713A00C8597F /* DataController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE11A1092B18B2F500D3716C /* CategoryAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddViewModel.swift; sourceTree = "<group>"; };
 		AE2509EE2B15D38600E36483 /* VocabListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabListViewModel.swift; sourceTree = "<group>"; };
 		AE2509F02B162BF800E36483 /* StatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButton.swift; sourceTree = "<group>"; };
 		AE5DF1D32AF678710089FA92 /* elementaryVocab.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = elementaryVocab.json; sourceTree = "<group>"; };
@@ -53,7 +55,6 @@
 		AE663DEC2B102990000532C2 /* VocabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabListView.swift; sourceTree = "<group>"; };
 		AE6C35732B158BED00CF9A9A /* VocabStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabStatus.swift; sourceTree = "<group>"; };
 		AE7445872B14AA71005CDC05 /* Ex+UINavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+UINavigation.swift"; sourceTree = "<group>"; };
-		AE968C232B1737D500D233DF /* EditVocabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVocabView.swift; sourceTree = "<group>"; };
 		AE9FA86C2B14B93B00C29D18 /* VocabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabItem.swift; sourceTree = "<group>"; };
 		AEA0E68A2B0B872E004777A2 /* Ex+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+View.swift"; sourceTree = "<group>"; };
 		AEA0E68C2B0B878B004777A2 /* Ex+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+Color.swift"; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		AEA7E7192AE8256C0057D201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AEA7E71C2AE8256C0057D201 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AEA90F0E2B0CC26F00AC33D9 /* StaticVocab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticVocab.swift; sourceTree = "<group>"; };
+		AEC7166C2B1853A100981BAE /* StudyOpt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyOpt.swift; sourceTree = "<group>"; };
 		AECA785C2AF6709300C8597F /* StudyPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlayView.swift; sourceTree = "<group>"; };
 		AECA78612AF670DB00C8597F /* StudyPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlayViewModel.swift; sourceTree = "<group>"; };
 		AECA78632AF6713A00C8597F /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -91,11 +93,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE11A1072B189B1F00D3716C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AECA78682AF674B500C8597F /* VocabModel.xcdatamodeld */,
+				AEA90F0E2B0CC26F00AC33D9 /* StaticVocab.swift */,
+				AE663DE42B102895000532C2 /* Vocab+CoreDataClass.swift */,
+				AE663DE52B102895000532C2 /* Vocab+CoreDataProperties.swift */,
+				AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */,
+				AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AE11A1082B189B2A00D3716C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AECA78632AF6713A00C8597F /* DataController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		AE8C9B012B04F41400A2386D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				AECA786C2AF675FD00C8597F /* JsonParser.swift */,
 				AE6C35732B158BED00CF9A9A /* VocabStatus.swift */,
+				AEC7166C2B1853A100981BAE /* StudyOpt.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -132,7 +156,7 @@
 			children = (
 				AEA0E6A22B0B8A5E004777A2 /* Info.plist */,
 				AEA7E7152AE8256B0057D201 /* ReadPlayApp.swift */,
-				AECA78672AF6749800C8597F /* CoreDataModel */,
+				AECA78672AF6749800C8597F /* CoreDataManager */,
 				AE8C9B012B04F41400A2386D /* Utilities */,
 				AECA78592AF6705D00C8597F /* Resources */,
 				AECA78542AF66FCA00C8597F /* Presentation */,
@@ -170,9 +194,11 @@
 		AECA78562AF66FF100C8597F /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				AEA0E6A72B0B929D004777A2 /* CategoryItem.swift */,
 				AEA0E68E2B0B87CF004777A2 /* CategoryView.swift */,
 				AEA0E6AD2B0BA796004777A2 /* CategoryViewModel.swift */,
 				AEA0E6AF2B0BA879004777A2 /* CategoryAddView.swift */,
+				AE11A1092B18B2F500D3716C /* CategoryAddViewModel.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -180,6 +206,7 @@
 		AECA78572AF6701000C8597F /* VocabList */ = {
 			isa = PBXGroup;
 			children = (
+				AE9FA86C2B14B93B00C29D18 /* VocabItem.swift */,
 				AE663DEC2B102990000532C2 /* VocabListView.swift */,
 				AE2509EE2B15D38600E36483 /* VocabListViewModel.swift */,
 			);
@@ -221,27 +248,19 @@
 		AECA785B2AF6706E00C8597F /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AEA0E6A72B0B929D004777A2 /* CategoryItem.swift */,
 				AEA0E6AB2B0BA4AA004777A2 /* CustomButton.swift */,
-				AE9FA86C2B14B93B00C29D18 /* VocabItem.swift */,
 				AE2509F02B162BF800E36483 /* StatusButton.swift */,
-				AE968C232B1737D500D233DF /* EditVocabView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		AECA78672AF6749800C8597F /* CoreDataModel */ = {
+		AECA78672AF6749800C8597F /* CoreDataManager */ = {
 			isa = PBXGroup;
 			children = (
-				AE663DE42B102895000532C2 /* Vocab+CoreDataClass.swift */,
-				AE663DE52B102895000532C2 /* Vocab+CoreDataProperties.swift */,
-				AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */,
-				AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */,
-				AECA78682AF674B500C8597F /* VocabModel.xcdatamodeld */,
-				AECA78632AF6713A00C8597F /* DataController.swift */,
-				AEA90F0E2B0CC26F00AC33D9 /* StaticVocab.swift */,
+				AE11A1072B189B1F00D3716C /* Model */,
+				AE11A1082B189B2A00D3716C /* Controller */,
 			);
-			path = CoreDataModel;
+			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,7 +346,6 @@
 				AE6C35742B158BED00CF9A9A /* VocabStatus.swift in Sources */,
 				AECA78642AF6713A00C8597F /* DataController.swift in Sources */,
 				AEA0E6AC2B0BA4AA004777A2 /* CustomButton.swift in Sources */,
-				AE968C242B1737D500D233DF /* EditVocabView.swift in Sources */,
 				AE2509F12B162BF800E36483 /* StatusButton.swift in Sources */,
 				AE663DE92B102895000532C2 /* Vocab+CoreDataProperties.swift in Sources */,
 				AE663DEA2B102895000532C2 /* Category+CoreDataClass.swift in Sources */,
@@ -338,7 +356,9 @@
 				AE7445882B14AA71005CDC05 /* Ex+UINavigation.swift in Sources */,
 				AECA785D2AF6709300C8597F /* StudyPlayView.swift in Sources */,
 				AEA0E68D2B0B878B004777A2 /* Ex+Color.swift in Sources */,
+				AE11A10A2B18B2F500D3716C /* CategoryAddViewModel.swift in Sources */,
 				AE663DEB2B102895000532C2 /* Category+CoreDataProperties.swift in Sources */,
+				AEC7166D2B1853A100981BAE /* StudyOpt.swift in Sources */,
 				AEA0E6A62B0B9167004777A2 /* FontManager.swift in Sources */,
 				AEA0E6A82B0B929D004777A2 /* CategoryItem.swift in Sources */,
 				AEA90F0F2B0CC26F00AC33D9 /* StaticVocab.swift in Sources */,

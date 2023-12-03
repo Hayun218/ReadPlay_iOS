@@ -36,10 +36,20 @@ struct CategoryView: View {
       .background(backGradient())
       .sheet(isPresented: $categoryVM.isAddOn, content: {
         CategoryAddView()
+          .environment(\.managedObjectContext, dataController.container.viewContext)
       })
-      .fullScreenCover(isPresented: $categoryVM.isEditSheetOn, content: {
-        // edit View
-      })
+      
+      // 카테고리 타이틀 수정
+      .alert("단어 수정하기", isPresented: $categoryVM.isEditSheetOn) {
+        TextField("단어장 타이틀", text: $categoryVM.editedTitle, axis: .vertical)
+        Button("취소", role: .cancel, action: { categoryVM.restoreOffsetToggle() })
+        Button("확인") {
+          dataController.updateCategoryTitle(category: categoryVM.selectedCategory!, title: categoryVM.editedTitle, context: managedObjectContext)
+          categoryVM.restoreOffsetToggle()
+          dismiss()
+        }
+      }
+    
       .alert("단어장이 삭제됩니다", isPresented: $categoryVM.isDeleteAlertOn, actions: {
         Button {
           if let category = categoryVM.selectedCategory {
