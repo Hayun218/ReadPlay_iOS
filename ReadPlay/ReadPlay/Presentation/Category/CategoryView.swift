@@ -88,7 +88,7 @@ extension CategoryView {
   private func secondRow() -> some View {
     return HStack {
       Image(systemName: "list.bullet")
-      Text("22개의 단어장")
+      Text("\(dataController.fetchedCategories.count)개의 단어장")
       Spacer()
       CustomButton(text: "단어장 추가", icon: "plus.circle")
         .onTapGesture {

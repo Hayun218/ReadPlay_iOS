@@ -10,7 +10,7 @@
 		AE11A10A2B18B2F500D3716C /* CategoryAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE11A1092B18B2F500D3716C /* CategoryAddViewModel.swift */; };
 		AE2509EF2B15D38600E36483 /* VocabListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2509EE2B15D38600E36483 /* VocabListViewModel.swift */; };
 		AE2509F12B162BF800E36483 /* StatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2509F02B162BF800E36483 /* StatusButton.swift */; };
-		AE5DF1D42AF678710089FA92 /* elementaryVocab.json in Resources */ = {isa = PBXBuildFile; fileRef = AE5DF1D32AF678710089FA92 /* elementaryVocab.json */; };
+		AE5DF1D42AF678710089FA92 /* 초등 필수 영단어.json in Resources */ = {isa = PBXBuildFile; fileRef = AE5DF1D32AF678710089FA92 /* 초등 필수 영단어.json */; };
 		AE663DE82B102895000532C2 /* Vocab+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE42B102895000532C2 /* Vocab+CoreDataClass.swift */; };
 		AE663DE92B102895000532C2 /* Vocab+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE52B102895000532C2 /* Vocab+CoreDataProperties.swift */; };
 		AE663DEA2B102895000532C2 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */; };
@@ -47,7 +47,7 @@
 		AE11A1092B18B2F500D3716C /* CategoryAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddViewModel.swift; sourceTree = "<group>"; };
 		AE2509EE2B15D38600E36483 /* VocabListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabListViewModel.swift; sourceTree = "<group>"; };
 		AE2509F02B162BF800E36483 /* StatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButton.swift; sourceTree = "<group>"; };
-		AE5DF1D32AF678710089FA92 /* elementaryVocab.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = elementaryVocab.json; sourceTree = "<group>"; };
+		AE5DF1D32AF678710089FA92 /* 초등 필수 영단어.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "초등 필수 영단어.json"; sourceTree = "<group>"; };
 		AE663DE42B102895000532C2 /* Vocab+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vocab+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AE663DE52B102895000532C2 /* Vocab+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vocab+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AE663DE62B102895000532C2 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		AEA90F012B0CB97900AC33D9 /* JsonData */ = {
 			isa = PBXGroup;
 			children = (
-				AE5DF1D32AF678710089FA92 /* elementaryVocab.json */,
+				AE5DF1D32AF678710089FA92 /* 초등 필수 영단어.json */,
 			);
 			path = JsonData;
 			sourceTree = "<group>";
@@ -325,7 +325,7 @@
 				AEA0E69F2B0B89D1004777A2 /* Pretendard-Regular.ttf in Resources */,
 				AEA7E71D2AE8256C0057D201 /* Preview Assets.xcassets in Resources */,
 				AEA0E69B2B0B89D1004777A2 /* Pretendard-Medium.ttf in Resources */,
-				AE5DF1D42AF678710089FA92 /* elementaryVocab.json in Resources */,
+				AE5DF1D42AF678710089FA92 /* 초등 필수 영단어.json in Resources */,
 				AEA7E71A2AE8256C0057D201 /* Assets.xcassets in Resources */,
 				AEA0E6A02B0B89D1004777A2 /* Pretendard-Bold.ttf in Resources */,
 			);

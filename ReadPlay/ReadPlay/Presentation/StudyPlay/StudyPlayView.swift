@@ -17,6 +17,7 @@ struct StudyPlayView: View {
   let fetchedVocabs: Array<Vocab>
   let studyOpt: Int
   var displayedVocabs: Array<String> = []
+  var displayedImgs: Array<String> = []
   let selectedStatus: VocabStatus
   
   init(fetchedVocabs: [Vocab], selectedStatus: VocabStatus, studyOpt: Int) {
@@ -26,22 +27,26 @@ struct StudyPlayView: View {
     
     if fetchedVocabs.isEmpty {
       displayedVocabs.append("X 학습 단어 X")
+      displayedImgs = ["", ]
     } else {
       // 영어만
       if studyOpt == 1 {
         displayedVocabs = fetchedVocabs.map {$0.word}
+        displayedImgs = fetchedVocabs.map { "\($0.category.categoryId)_\($0.word)_img" }
       } else if studyOpt == 2 { // 한국어만
         displayedVocabs = fetchedVocabs.map {$0.meaning}
+        displayedImgs = fetchedVocabs.map { "\($0.category.categoryId)_\($0.word)_img" }
       } else { // 둘다
         for vocab in fetchedVocabs {
           displayedVocabs.append(vocab.word)
           displayedVocabs.append(vocab.meaning)
+          displayedImgs.append("\(vocab.category.categoryId)_\(vocab.word)_img")
+          displayedImgs.append("\(vocab.category.categoryId)_\(vocab.word)_img")
         }
       }
     }
     let vocabs = self.displayedVocabs
     _studyPlayVM = StateObject(wrappedValue: StudyPlayViewModel(vocabs: vocabs))
-    
   }
   
   var body: some View {
@@ -49,26 +54,37 @@ struct StudyPlayView: View {
       
       backButton
       
-        VStack {
-          
-          vocabIdx
-          
-          Spacer()
-          
-          Text(displayedVocabs[studyPlayVM.wordIdx])
-            .customFont(.learningText)
-            .foregroundStyle(.textBlack)
+      VStack {
+        
+        vocabIdx
+        
+        
+        if let image = UIImage(named: displayedImgs[studyPlayVM.wordIdx]) {
+          Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 15)
+            .padding(.top, 20)
+            .padding(.bottom, 40)
+        } else {
           Spacer()
         }
-          .frame(maxWidth: .infinity)
-          .frame(height: screenHeight/2)
-          .background(
-            RoundedRectangle(cornerRadius: 20)
-              .fill(.shadow(.drop(radius: 4)))
-              .foregroundColor(.surface)
-          )
-          .padding(.horizontal, 32)
-          .padding(.top, 55)
+        
+        Text(displayedVocabs[studyPlayVM.wordIdx])
+          .customFont(.learningText)
+          .foregroundStyle(.textBlack)
+        
+        Spacer()
+      }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(
+        RoundedRectangle(cornerRadius: 20)
+          .fill(.shadow(.drop(radius: 4)))
+          .foregroundColor(.surface)
+      )
+      .padding(.horizontal, 32)
+      .padding(.vertical, 54)
       
       
       Spacer()
@@ -116,9 +132,14 @@ struct StudyPlayView: View {
       .padding(.bottom, 50)
     }
     .alert("학습을 완료하였어요.", isPresented: $studyPlayVM.isDone) {
-      Button("취소", role: .cancel, action: {})
+      Button("취소", role: .cancel, action: {
+        dataController.updateStudyDate(category: fetchedVocabs[0].category, context: managedObjectContext)
+      })
       
-      Button("완료", action: {dismiss()})
+      Button("완료", action: {
+        dataController.updateStudyDate(category: fetchedVocabs[0].category, context: managedObjectContext)
+        dismiss()
+      })
       
     } message: {
       Text("축하합니다!")
@@ -133,7 +154,7 @@ struct StudyPlayView: View {
 extension StudyPlayView {
   
   private var vocabIdx: some View {
-    Text(fetchedVocabs.isEmpty ? "0 / 0" : "\(studyPlayVM.wordIdx) / \(displayedVocabs.count)")
+    Text(fetchedVocabs.isEmpty ? "0 / 0" : "\(studyPlayVM.wordIdx+1) / \(displayedVocabs.count)")
       .customFont(.body1)
       .foregroundStyle(.gray300)
       .padding(.top, 20)

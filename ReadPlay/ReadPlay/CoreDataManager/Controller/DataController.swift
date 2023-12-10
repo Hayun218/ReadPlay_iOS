@@ -5,7 +5,6 @@
 //  Created by yun on 11/4/23.
 //
 
-
 import CoreData
 import SwiftUI
 
@@ -15,6 +14,10 @@ final class DataController: ObservableObject {
   
   let container: NSPersistentContainer
   let context: NSManagedObjectContext
+  
+  var jsonFileNames = [
+    "초등 필수 영단어",
+  ]
   
   @Published var fetchedCategories = [Category]() // sink 연습하기,,
   
@@ -28,11 +31,20 @@ final class DataController: ObservableObject {
     
     context = container.viewContext
     
-    resetCoreData()
-    
     fetchCategory()
+    
     if fetchedCategories.isEmpty {
-      saveDefaultCategory()
+      saveAllCategories(fileNames: jsonFileNames)
+    } else if fetchedCategories.count < jsonFileNames.count {
+      for idx in fetchedCategories.indices {
+        for name in jsonFileNames {
+          if fetchedCategories[idx].title == name {
+            jsonFileNames.remove(at: idx) // 기존의 카테고리 남기고 새로 추가된 카테고리 추가
+          }
+        }
+      }
+      saveAllCategories(fileNames: jsonFileNames)
+      print("새로운 카테고리 추가")
     }
   }
   
@@ -42,7 +54,6 @@ final class DataController: ObservableObject {
     if context.hasChanges {
       do{
         try context.save()
-        print("Data Saved!")
       }catch{
         print("Could not save the data")
       }
@@ -51,23 +62,40 @@ final class DataController: ObservableObject {
   
   // MARK: - DEFAULT CREATE
   
-  private func saveDefaultCategory() {
+  
+  private func saveAllCategories(fileNames: [String]) {
     
-    let staticVocab: [StaticVocab] = load(fileName: "elementaryVocab")
+    for file in fileNames {
+      self.saveDefaultCategory(fileName: file)
+    }
+  }
+  
+  private func saveDefaultCategory(fileName: String) {
+    
+    let staticVocab: [StaticVocab] = load(fileName: fileName)
     let staticCategory = Category(context: context)
-    staticCategory.categoryId = 1
+    
+    if fetchedCategories.isEmpty {
+      staticCategory.categoryId = 1
+    } else {
+      staticCategory.categoryId = fetchedCategories.last!.categoryId + 1
+    }
+    
     staticCategory.createdDate = getCurrentDateTime()
-    staticCategory.title = "초등 필수 영단어"
+    staticCategory.title = fileName
     
     for vocab in staticVocab {
       saveVocab(category: staticCategory, wordId: Int32(vocab.word_id), meaning: vocab.meaning, word: vocab.word, context: context)
     }
+    fetchCategory()
   }
   
   // MARK: - CREATE
   
   // 전체 카테고리 생성 및 단어리스트 저장
-  func saveCategory(title: String, newVocabs: [Vocab], context: NSManagedObjectContext) {
+  func saveCategory(title: String, newVocabs: [StaticVocab], context: NSManagedObjectContext) {
+    fetchCategory()
+    
     let category = Category(context: context)
     let newId: Int32 = fetchedCategories.last!.categoryId+1
     category.createdDate = getCurrentDateTime()
@@ -75,7 +103,9 @@ final class DataController: ObservableObject {
     category.title = title
     category.progress = 0
     
-    saveNewCategoryVocabs(newCategory: category, newId: newId, newVocabs: newVocabs, context: context)
+    saveNewCategoryVocabs(newCategory: category, newVocabs: newVocabs, context: context)
+    
+    fetchCategory()
   }
   
   // 한 단어 저장
@@ -92,11 +122,12 @@ final class DataController: ObservableObject {
     save(context: context)
   }
   
-  private func saveNewCategoryVocabs(newCategory: Category, newId: Int32, newVocabs: [Vocab], context: NSManagedObjectContext) {
-    
+  private func saveNewCategoryVocabs(newCategory: Category, newVocabs: [StaticVocab], context: NSManagedObjectContext) {
     
     for vocab in newVocabs {
-      saveVocab(category: newCategory, wordId: Int32(vocab.id), meaning: vocab.meaning, word: vocab.word, context: context)
+      if vocab != newVocabs.last {
+        saveVocab(category: newCategory, wordId: Int32(vocab.word_id), meaning: vocab.meaning, word: vocab.word, context: context)
+      }
     }
   }
   
@@ -106,6 +137,7 @@ final class DataController: ObservableObject {
     let request = NSFetchRequest<Category>(entityName: "Category")
     do {
       fetchedCategories = try self.context.fetch(request)
+      fetchedCategories.sort{ $0.categoryId < $1.categoryId }
     } catch let error {
       print("error fetching \(error.localizedDescription)")
     }
@@ -126,6 +158,11 @@ final class DataController: ObservableObject {
     
     updateProgress(category: vocab.category)
 
+    save(context: context)
+  }
+  
+  func updateStudyDate(category: Category, context: NSManagedObjectContext) {
+    category.studyDate = getCurrentDateTime()
     save(context: context)
   }
   
@@ -156,6 +193,11 @@ final class DataController: ObservableObject {
   // 카테고리 전체 삭제
   func deleteCategory(category: Category, context: NSManagedObjectContext) {
     context.delete(category)
+    fetchCategory()
+    
+    for categoryIdx in fetchedCategories.indices {
+      fetchedCategories[categoryIdx].categoryId = Int32(categoryIdx+1)
+    }
     save(context: context)
   }
   

@@ -166,6 +166,7 @@ extension VocabListView {
     }
     .frame(maxWidth: .infinity)
   }
+  
   private var tabBar: some View {
     HStack {
       Button(action: { dismiss() }, label: {
@@ -190,10 +191,17 @@ extension VocabListView {
       
       HStack(alignment: .center) {
         
-        Text("\(fetchedVocabs.count)개 단어\n생성일: - \(category.createdDate)")
-          .lineSpacing(-0.3)
-          .customFont(.caption1)
-          .foregroundStyle(.textWhite)
+        if category.studyDate != nil {
+          Text("\(fetchedVocabs.count)개 단어\n학습일: - \(category.studyDate!)")
+            .lineSpacing(-0.3)
+            .customFont(.caption1)
+            .foregroundStyle(.textWhite)
+        } else {
+          Text("\(fetchedVocabs.count)개 단어\n생성일: - \(category.createdDate)")
+            .lineSpacing(-0.3)
+            .customFont(.caption1)
+            .foregroundStyle(.textWhite)
+        }
         
         Spacer()
         
@@ -211,7 +219,7 @@ extension VocabListView {
     .padding(.horizontal, 20)
     .padding(.vertical, 16)
     .frame(maxWidth: .infinity)
-    .frame(height: screenHeight/5)
+    .frame(height: 180)
   }
 }
 

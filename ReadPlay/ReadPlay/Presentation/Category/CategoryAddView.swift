@@ -74,7 +74,7 @@ struct CategoryAddView: View {
         }
       }
       
-     
+      
       
     }
     .background(backGradient())
@@ -93,8 +93,11 @@ extension CategoryAddView {
       })
       Spacer()
       
-      Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-        Text("작성 완료")
+      Button(action: {
+        dataController.saveCategory(title: addVM.categoryTitle, newVocabs: newVocabs, context: managedObjectContext)
+        dismiss()
+      } , label: {
+        Text("추가하기")
           .customFont(.body1)
           .foregroundStyle(.textWhite)
       })
@@ -113,6 +116,7 @@ extension CategoryAddView {
       get: { newVocabs[idx].word },
       set: { newValue in
         newVocabs[idx].word = newValue
+        newVocabs[idx].word_id = idx
         if newVocabs.count-1 == idx {
           addNewVocabIfNeeded(idx)
         }
@@ -131,18 +135,20 @@ extension CategoryAddView {
     
     return VStack(alignment: .center, spacing: 0) {
       HStack(alignment: .center) {
-        Text("\(idx)")
+        Text("\(idx+1)")
         
         VStack(spacing: 6) {
           
           TextField("단어",  text: wordBinding)
             .frame(height: 32)
+            .padding(.leading, 10)
             .background {
               RoundedRectangle(cornerRadius: 4)
                 .foregroundStyle(.gray100)
             }
           TextField("뜻",  text: meaningBinding)
             .frame(height: 32)
+            .padding(.leading, 10)
             .background {
               RoundedRectangle(cornerRadius: 4)
                 .foregroundStyle(.gray100)
@@ -155,7 +161,11 @@ extension CategoryAddView {
         .padding(.vertical, 12)
         
         Button {
-          print("remove the idx")
+          if newVocabs.count > 2 {
+            newVocabs.remove(at: idx)
+          } else {
+            // alert
+          }
         } label: {
           Image(systemName: "trash")
             .font(.system(size: 20))

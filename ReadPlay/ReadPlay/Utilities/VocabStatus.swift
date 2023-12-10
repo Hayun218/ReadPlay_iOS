@@ -28,7 +28,7 @@ enum VocabStatus: Int, CaseIterable {
     case .all: "전체 단어"
     case .yellow: "학습중"
     case .red: "헷갈림"
-    case .green: "암기완료"
+    case .green: "완료함"
     }
   }
 }
