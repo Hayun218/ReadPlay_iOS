@@ -31,44 +31,7 @@ struct VocabListView: View {
   var body: some View {
     
     VStack {
-      
-      VStack {
-        tabBar
-        
-        Spacer()
-        
-        HStack(alignment: .center) {
-          
-          Text("\(fetchedVocabs.count)개 단어\n생성일: - \(category.createdDate)")
-            .lineSpacing(-0.3)
-            .customFont(.caption1)
-            .foregroundStyle(.textWhite)
-          
-          Spacer()
-          
-          NavigationLink {
-            if vocabVM.selectedStatus == .all {
-              StudyPlayView(fetchedVocabs: Array(fetchedVocabs), selectedStatus: vocabVM.selectedStatus)
-            } else {
-              let filteredVocabs = fetchedVocabs.filter {$0.status == vocabVM.selectedStatus.rawValue}
-              StudyPlayView(fetchedVocabs: filteredVocabs, selectedStatus: vocabVM.selectedStatus)
-            }
-          } label: {
-            CustomButton(text: "학습하기", icon: "play.circle")
-          }
-
-         
-        }
-        .padding(.bottom, 20)
-        
-        statusButton()
-        
-        
-      }
-      .padding(.horizontal, 20)
-      .padding(.vertical, 16)
-      .frame(maxWidth: .infinity)
-      .frame(height: screenHeight/5)
+      categoryBar
       
       ScrollView {
         LazyVStack(spacing: 0) {
@@ -85,6 +48,74 @@ struct VocabListView: View {
         }
       }
     }
+    // 학습 진행
+    .sheet(isPresented: $vocabVM.isStudyOn, content: {
+      
+      VStack {
+        
+        Text("학습 옵션을 선택해주세요.")
+          .customFont(.headline3)
+          .foregroundStyle(.textBlack)
+          .padding(.top, 30)
+        
+        Spacer()
+        
+        Picker("", selection: $vocabVM.studyOpt) {
+          ForEach(1 ..< 4, id: \.self) { idx in
+            Text(StudyOpt.init(rawValue: idx)!.studyOptWord)
+              .customFont(.body1)
+              .foregroundStyle(.textBlack)
+          }
+        }
+        .pickerStyle(.wheel)
+        
+        Spacer()
+        
+        VStack(spacing: 12) {
+          Button {
+            vocabVM.restoreOffset()
+            vocabVM.studyButtonClicked()
+            vocabVM.navigateToStudy()
+          } label: {
+            Text("확인")
+              .customFont(.caption3)
+              .foregroundStyle(.textWhite)
+              .frame(maxWidth: .infinity)
+              .frame(height: 48)
+              .background(
+                RoundedRectangle(cornerRadius: 10)
+                  .foregroundStyle(.blueButton)
+              )
+          }
+          
+          Button {
+            vocabVM.restoreOffset()
+            vocabVM.studyButtonClicked()
+          } label: {
+            Text("취소")
+              .customFont(.caption3)
+              .foregroundStyle(.gray300)
+              .frame(maxWidth: .infinity)
+              .frame(height: 48)
+              .background(
+                RoundedRectangle(cornerRadius: 10)
+                  .foregroundStyle(.gray200)
+              )
+          }
+        }
+      }
+      .padding(.horizontal, 40)
+      .presentationDetents([.height(350)])
+    })
+    .navigationDestination(isPresented: $vocabVM.isNavigateStudyOn, destination: {
+      if vocabVM.selectedStatus == .all {
+        StudyPlayView(fetchedVocabs: Array(fetchedVocabs), selectedStatus: vocabVM.selectedStatus, studyOpt: vocabVM.studyOpt)
+      } else {
+        let filteredVocabs = fetchedVocabs.filter {$0.status == vocabVM.selectedStatus.rawValue}
+        StudyPlayView(fetchedVocabs: filteredVocabs, selectedStatus: vocabVM.selectedStatus, studyOpt: vocabVM.studyOpt)
+      }
+    })
+    
     // 단어 수정
     .alert("단어 수정하기", isPresented: $vocabVM.isEditOn) {
       TextField("단어", text: $vocabVM.editedWord)
@@ -135,6 +166,7 @@ extension VocabListView {
     }
     .frame(maxWidth: .infinity)
   }
+  
   private var tabBar: some View {
     HStack {
       Button(action: { dismiss() }, label: {
@@ -150,8 +182,52 @@ extension VocabListView {
       Spacer()
     }
   }
+  
+  private var categoryBar: some View {
+    VStack {
+      tabBar
+      
+      Spacer()
+      
+      HStack(alignment: .center) {
+        
+        if category.studyDate != nil {
+          Text("\(fetchedVocabs.count)개 단어\n학습일: - \(category.studyDate!)")
+            .lineSpacing(-0.3)
+            .customFont(.caption1)
+            .foregroundStyle(.textWhite)
+        } else {
+          Text("\(fetchedVocabs.count)개 단어\n생성일: - \(category.createdDate)")
+            .lineSpacing(-0.3)
+            .customFont(.caption1)
+            .foregroundStyle(.textWhite)
+        }
+        
+        Spacer()
+        
+        Button {
+          vocabVM.studyButtonClicked()
+        } label: {
+          CustomButton(text: "학습하기", icon: "play.circle")
+        }
+      }
+      .padding(.bottom, 20)
+      
+      statusButton()
+      
+    }
+    .padding(.horizontal, 20)
+    .padding(.vertical, 16)
+    .frame(maxWidth: .infinity)
+    .frame(height: 180)
+  }
 }
 
 //#Preview {
 //    VocabListView()
 //}
+
+struct SizePreferenceKey: PreferenceKey {
+  static var defaultValue: CGSize = .zero
+  static func reduce(value: inout CGSize, nextValue: () -> CGSize) { value = nextValue() }
+}

@@ -17,6 +17,7 @@ struct VocabItem: View {
   @State var vocabModifier: String = ""
   
   let offsetWidth = UIScreen.main.bounds.size.width/2.5
+  var image: String = ""
   
   @State var vocab: Vocab
   let vocabId: Int
@@ -24,11 +25,13 @@ struct VocabItem: View {
   init(vocab: Vocab, vocabId: Int) {
     self._vocab = State(initialValue: vocab)
     self.vocabId = vocabId
+    self.image = "\(_vocab.wrappedValue.category.categoryId)_\(_vocab.wrappedValue.word)_img"
   }
   
   init(vocab: Vocab) {
     self._vocab = State(initialValue: vocab)
     self.vocabId = Int(_vocab.wrappedValue.id)
+    self.image = "\(_vocab.wrappedValue.category.categoryId)_\(_vocab.wrappedValue.word)_img"
   }
   
   
@@ -36,11 +39,22 @@ struct VocabItem: View {
     
     VStack(alignment: .center) {
       
-      HStack(alignment: .top, spacing: 0) {
+      HStack(alignment: .center, spacing: 0) {
         
         vocabNumText
         
+        if let image = UIImage(named: image) {
+          
+          Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 80)
+            .padding(.leading, 20)
+            .padding(.top, 10)
+        }
+        
         vocabContent
+          .padding(.leading, 20)
         
         Spacer()
         
@@ -75,7 +89,7 @@ struct VocabItem: View {
         vocabModifier = ""
       }
     }
- 
+    
     
     .overlay(
       showOpt ?
@@ -93,7 +107,7 @@ struct VocabItem: View {
       self.showOpt = false
       self.offset = 0
     })
-   
+    
   }
 }
 
@@ -106,8 +120,6 @@ extension VocabItem {
       
       Button {
         dataController.updateStatusVocab(vocab: vocab, status: Int32(vocabVM.updateStatus(vocab: vocab)), context: dataController.context)
-//        vocab.status = Int32(vocabVM.updateStatus(vocab: vocab))
-//        dataController.save(context: dataController.context)
       } label: {
         Circle()
           .stroke(.gray200, lineWidth: 1.4)
@@ -122,14 +134,20 @@ extension VocabItem {
       Spacer()
     }
     .padding(.trailing, 29)
+    .padding(.top, 14)
   }
   
   private var vocabNumText: some View {
-    Text("\(vocabModifier)\(vocabId)")
-      .customFont(.caption1)
-      .foregroundStyle(.gray300)
-      .padding(.horizontal, 20)
-      .padding(.top, 15)
+    
+    VStack {
+      Text("\(vocabModifier)\(vocabId)")
+        .customFont(.caption1)
+        .foregroundStyle(.gray300)
+        .padding(.leading, 20)
+        .padding(.top, 15)
+      
+      Spacer()
+    }
   }
   
   private var vocabContent: some View {
@@ -141,7 +159,7 @@ extension VocabItem {
         .customFont(.body1)
         .foregroundStyle(.gray300)
     }
-    .padding(.top, 24)
+    .padding(.top, 14)
   }
   
   private var swipeGesture: some Gesture {

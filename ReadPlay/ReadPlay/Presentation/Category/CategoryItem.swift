@@ -62,6 +62,10 @@ struct CategoryItem: View {
       
       : nil
     )
+    .onChange(of: categoryVM.restoreOffset, { _, _ in
+      self.showOpt = false
+      self.offset = 0
+    })
   }
 }
 

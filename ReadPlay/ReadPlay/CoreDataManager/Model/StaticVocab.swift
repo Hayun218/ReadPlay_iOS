@@ -19,4 +19,10 @@ struct StaticVocab: Hashable, Codable {
     self.meaning = try container.decode(String.self, forKey: .meaning)
   }
   
+  init(word_id: Int, word: String, meaning: String) {
+    self.word_id = word_id
+    self.word = word
+    self.meaning = meaning
+  }
+  
 }
