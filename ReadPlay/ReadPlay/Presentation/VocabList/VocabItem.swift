@@ -73,7 +73,7 @@ struct VocabItem: View {
         .foregroundStyle(.surface)
     )
     .offset(x: offset)
-    .gesture(swipeGesture)
+    .gesture(dataController.isForUser ? swipeGesture : nil)
     
     .onAppear {
       if vocab.id != Int32(vocabId) {

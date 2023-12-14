@@ -15,8 +15,11 @@ final class DataController: ObservableObject {
   let container: NSPersistentContainer
   let context: NSManagedObjectContext
   
+  // 1차 배포용 유무
+  let isForUser = Bool()
+  
   var jsonFileNames = [
-    "초등 필수 영단어",
+    "초등 필수 영단어 800",
   ]
   
   @Published var fetchedCategories = [Category]() // sink 연습하기,,
@@ -30,7 +33,7 @@ final class DataController: ObservableObject {
     }
     
     context = container.viewContext
-    
+    resetCoreData()
     fetchCategory()
     
     if fetchedCategories.isEmpty {

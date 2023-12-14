@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoryItem: View {
   @Environment(\.managedObjectContext) var managedObjectContext
   @State private var offset: CGFloat = 0
+  @StateObject var dataController = DataController.shared
   @StateObject var categoryVM = CategoryViewModel.shared
   @GestureState private var gestureOffset: CGFloat = 0
   @State private var showOpt = Bool()
@@ -48,7 +49,7 @@ struct CategoryItem: View {
       )
       .padding(.leading, showOpt ? 0 : 20)
       .offset(x: offset)
-      .gesture(swipeGesture)
+      .gesture(dataController.isForUser ? swipeGesture : nil)
     }
     .overlay(
       showOpt ?
