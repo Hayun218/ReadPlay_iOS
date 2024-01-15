@@ -225,8 +225,8 @@
 		AECA78592AF6705D00C8597F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AEA90F012B0CB97900AC33D9 /* JsonData */,
 				AEA7E7192AE8256C0057D201 /* Assets.xcassets */,
+				AEA90F012B0CB97900AC33D9 /* JsonData */,
 				AECA785B2AF6706E00C8597F /* Components */,
 				AECA785A2AF6706800C8597F /* Extensions */,
 				AE8C9B022B04F49500A2386D /* Fonts */,
