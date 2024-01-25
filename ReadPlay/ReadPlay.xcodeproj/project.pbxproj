@@ -17,6 +17,7 @@
 		AE663DEB2B102895000532C2 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */; };
 		AE663DED2B102990000532C2 /* VocabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE663DEC2B102990000532C2 /* VocabListView.swift */; };
 		AE6C35742B158BED00CF9A9A /* VocabStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C35732B158BED00CF9A9A /* VocabStatus.swift */; };
+		AE7307F12B623823009639C8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE7307F02B623823009639C8 /* Launch Screen.storyboard */; };
 		AE7445882B14AA71005CDC05 /* Ex+UINavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7445872B14AA71005CDC05 /* Ex+UINavigation.swift */; };
 		AE9FA86D2B14B93B00C29D18 /* VocabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9FA86C2B14B93B00C29D18 /* VocabItem.swift */; };
 		AEA0E68B2B0B872E004777A2 /* Ex+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0E68A2B0B872E004777A2 /* Ex+View.swift */; };
@@ -54,6 +55,7 @@
 		AE663DE72B102895000532C2 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AE663DEC2B102990000532C2 /* VocabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabListView.swift; sourceTree = "<group>"; };
 		AE6C35732B158BED00CF9A9A /* VocabStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabStatus.swift; sourceTree = "<group>"; };
+		AE7307F02B623823009639C8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		AE7445872B14AA71005CDC05 /* Ex+UINavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+UINavigation.swift"; sourceTree = "<group>"; };
 		AE9FA86C2B14B93B00C29D18 /* VocabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabItem.swift; sourceTree = "<group>"; };
 		AEA0E68A2B0B872E004777A2 /* Ex+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+View.swift"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		AECA78592AF6705D00C8597F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AE7307F02B623823009639C8 /* Launch Screen.storyboard */,
 				AEA7E7192AE8256C0057D201 /* Assets.xcassets */,
 				AEA90F012B0CB97900AC33D9 /* JsonData */,
 				AECA785B2AF6706E00C8597F /* Components */,
@@ -323,6 +326,7 @@
 			files = (
 				AEA0E6A12B0B89D1004777A2 /* Pretendard-SemiBold.ttf in Resources */,
 				AEA0E69F2B0B89D1004777A2 /* Pretendard-Regular.ttf in Resources */,
+				AE7307F12B623823009639C8 /* Launch Screen.storyboard in Resources */,
 				AEA7E71D2AE8256C0057D201 /* Preview Assets.xcassets in Resources */,
 				AEA0E69B2B0B89D1004777A2 /* Pretendard-Medium.ttf in Resources */,
 				AE5DF1D42AF678710089FA92 /* 초등 필수 영단어 800.json in Resources */,
@@ -502,11 +506,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReadPlay/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "리드플레이";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -533,11 +538,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReadPlay/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "리드플레이";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

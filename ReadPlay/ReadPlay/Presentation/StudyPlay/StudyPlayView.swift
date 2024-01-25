@@ -56,26 +56,44 @@ struct StudyPlayView: View {
       
       VStack {
         
-        vocabIdx
-        
-        
-        if let image = UIImage(named: displayedImgs[studyPlayVM.wordIdx]) {
-          Image(uiImage: image)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 15)
-            .padding(.top, 20)
-            .padding(.bottom, 40)
+        if (!studyPlayVM.status) {
+          Text("[\(self.selectedStatus.buttonLabel)] 단계의 \n[\(StudyOpt(rawValue: studyOpt)!.studyOptWord)] 단어를 학습합니다.")
+            .multilineTextAlignment(.center)
+            .customFont(.headline3)
+            .foregroundStyle(.blueButton)
+            .padding(.top, 30)
+          
+          Spacer()
+          
+          Text("\(studyPlayVM.counter)")
+            .customFont(.learningText)
+            .foregroundStyle(.blueButton)
+          
+          Spacer()
+          
+          
         } else {
+          
+          vocabIdx
+          
+          if let image = UIImage(named: displayedImgs[studyPlayVM.wordIdx]) {
+            Image(uiImage: image)
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(maxWidth: .infinity)
+              .padding(.horizontal, 15)
+              .padding(.top, 20)
+              .padding(.bottom, 40)
+          } else {
+            Spacer()
+          }
+          
+          Text(displayedVocabs[studyPlayVM.wordIdx])
+            .customFont(.learningText)
+            .foregroundStyle(.textBlack)
+          
           Spacer()
         }
-        
-        Text(displayedVocabs[studyPlayVM.wordIdx])
-          .customFont(.learningText)
-          .foregroundStyle(.textBlack)
-        
-        Spacer()
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(
@@ -144,7 +162,9 @@ struct StudyPlayView: View {
     } message: {
       Text("축하합니다!")
     }
-    
+    .onDisappear {
+      studyPlayVM.stopTimer()
+    }
     .background(backGradient())
     .navigationBarBackButtonHidden()
     

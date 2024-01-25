@@ -9,6 +9,11 @@ import SwiftUI
 
 final class StudyPlayViewModel: ObservableObject {
   let displayedVocabs: [String]
+  // 초기 타이머 구현
+  @Published var status: Bool = false
+  @Published var counter: Int = 3
+  var initTimer = Timer()
+  
   @Published var wordIdx: Int = 0
   @Published var isDone = Bool()
   @Published var timer: Timer?
@@ -18,6 +23,19 @@ final class StudyPlayViewModel: ObservableObject {
   
   init(vocabs: [String]) {
     self.displayedVocabs = vocabs
+    self.startInitTimer()
+  }
+  
+  private func startInitTimer() {
+    self.initTimer = Timer.scheduledTimer(withTimeInterval: self.timeInterval, repeats: true) { _ in
+      self.counter -= 1
+      //      print(self.counter)
+      if(self.counter == 0) {
+        self.status = true;
+        self.initTimer.invalidate()
+        self.startTimer()
+      }
+    }
   }
   
   func increaseIdx() {
@@ -46,7 +64,7 @@ final class StudyPlayViewModel: ObservableObject {
     
     self.timer = Timer.scheduledTimer(withTimeInterval: self.timeInterval, repeats: true) { _ in
       self.increaseIdx()
-      print(self.timeInterval)
+      //      print(self.timeInterval)
     }
   }
   
