@@ -1,2 +1,1 @@
-# GitTemplates
-GitTemplates
+
