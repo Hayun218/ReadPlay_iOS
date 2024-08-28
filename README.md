@@ -1,4 +1,5 @@
 # ReadPlay
+![image](https://github.com/user-attachments/assets/9bab4306-9dc3-4516-bf50-17fd54ce29c1)
 
 <p align="center">
   <img width="200" src="https://github.com/user-attachments/assets/13be489c-746d-40a3-9a27-511ca0a57b27">
