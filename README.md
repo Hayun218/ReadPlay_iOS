@@ -1,2 +1,8 @@
-![image](https://github.com/user-attachments/assets/6c66e7b3-b9ca-4a65-a32d-49e24a8b5c22)
+# ReadPlay
+![image](https://github.com/user-attachments/assets/13be489c-746d-40a3-9a27-511ca0a57b27)
+
+![ReadPlayImg](https://github.com/user-attachments/assets/8171bb02-6804-417f-80f8-70d2ef4c6ca0)
+
+
+https://github.com/user-attachments/assets/edfe475e-d4d4-4f69-ab84-93c6ebd7ec8d
 
